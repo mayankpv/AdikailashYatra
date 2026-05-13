@@ -76,7 +76,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(26, 71, 42, 0.95) 0%, rgba(45, 90, 61, 0.95) 50%, rgba(139, 111, 71, 0.9) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="mountains" x="0" y="0" width="100" height="100" patternUnits="userSpac[...]
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="mountains" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,80 L25,30 L50,70 L75,20 L100,80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect fill="url(%23mountains)" width="1200" height="600"/></svg>');
             background-size: cover;
             background-position: center;
             color: white;
@@ -673,7 +673,7 @@
                 <div class="contact-item">
                     <div class="icon">📞</div>
                     <strong>Phone</strong>
-                    <p>+919643326628, +919654185767 </p>
+                    <p>+919643326628, +919654185767</p>
                     <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">Call us anytime</p>
                 </div>
                 <div class="contact-item">
@@ -685,7 +685,7 @@
                 <div class="contact-item">
                     <div class="icon">📍</div>
                     <strong>Location</strong>
-                    <p>Golden-I,Shop No- D&E-228B, Block-D&E</p>
+                    <p>Golden-I, Shop No- D&E-228B, Block-D&E</p>
                     <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">Serving all of India</p>
                 </div>
             </div>
@@ -767,62 +767,64 @@
         const errorMessage = document.getElementById('errorMessage');
         const submitButton = form.querySelector('.submit-button');
 
+        // ⚠️ IMPORTANT: Replace this URL with your Google Apps Script deployment URL
+        // Get this URL after deploying your Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLaV4HKXuywGq0hlN7l_XH3a_tgdAWXufjh8wBp3_R_P3J4UIyD_qgs5pG6CGPp_ga1w/exec';
+
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Hide messages
+            // Hide any existing messages
             successMessage.style.display = 'none';
             errorMessage.style.display = 'none';
 
-            // Disable button and show loading state
+            // Disable submit button to prevent double submission
             submitButton.disabled = true;
+            const originalButtonText = submitButton.textContent;
             submitButton.textContent = 'Submitting...';
 
-            // Create FormData with field names matching your Google Sheet columns
-            const formData = new FormData();
-            formData.append('Timestamp', new Date().toLocaleString('en-IN'));
-            formData.append('Name', document.getElementById('name').value);
-            formData.append('Email', document.getElementById('email').value);
-            formData.append('Phone', document.getElementById('phone').value);
-            formData.append('Service Type', document.getElementById('eventType').value);
-            formData.append('Travel Month', document.getElementById('eventDate').value);
-            formData.append('Guests', document.getElementById('guests').value);
-            formData.append('Message', document.getElementById('message').value);
-
-            // Your Google Apps Script URL
-            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLaV4HKXuywGq0hlN7l_XH3a_tgdAWXufjh8wBp3_R_P3J4UIyD_qgs5pG6CGPp_ga1w/exec';
+            // Create FormData object from the entire form
+            const formData = new FormData(form);
 
             try {
+                // Send data to Google Apps Script
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: formData,
-                    mode: 'no-cors'
+                    mode: 'no-cors' // This allows cross-origin requests
                 });
 
-                // With no-cors mode, we can't check response status, so we assume success
+                // Show success message
                 successMessage.style.display = 'block';
-                form.reset();
-                submitButton.textContent = 'Submit Pilgrimage Inquiry';
-                submitButton.disabled = false;
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-                
-                // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-            } catch (error) {
-                console.error('Error:', error);
-                errorMessage.style.display = 'block';
-                submitButton.textContent = 'Submit Pilgrimage Inquiry';
-                submitButton.disabled = false;
+                // Reset form
+                form.reset();
                 
-                // Hide error message after 5 seconds
+                // Restore button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                
+                // Hide success message after 6 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 6000);
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+                
+                // Show error message
+                errorMessage.style.display = 'block';
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Restore button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                
+                // Hide error message after 6 seconds
                 setTimeout(() => {
                     errorMessage.style.display = 'none';
-                }, 5000);
+                }, 6000);
             }
         });
     </script>
