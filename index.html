@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adi Kailash Yatra - Premium Event & Trip Planning</title>
+    <title>Adi Kailash Yatra - Sacred Pilgrimage & Event Planning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,24 +13,25 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #2c3e50;
+            background: #f9f7f4;
         }
 
         /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #8b6f47 100%);
             color: white;
-            padding: 2rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
@@ -38,227 +40,392 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: opacity 0.3s, border-bottom 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.3rem;
         }
 
         nav a:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            border-bottom-color: #d4af37;
         }
 
+        /* Hero Section */
         .hero {
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.95) 0%, rgba(45, 90, 61, 0.95) 50%, rgba(139, 111, 71, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="mountains" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,80 L25,30 L50,70 L75,20 L100,80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect fill="url(%23mountains)" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
             text-align: center;
-            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+            color: #d4af37;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            opacity: 0.95;
+            font-size: 1.1rem;
+            opacity: 0.9;
             margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .cta-button {
             display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
+            background: #d4af37;
+            color: #1a472a;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            border: 2px solid #d4af37;
+            margin: 0 0.5rem;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            background: #f4d03f;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #d4af37;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(212, 175, 55, 0.15);
         }
 
         /* Main Content */
         main {
-            padding: 3rem 0;
+            padding: 5rem 0;
         }
 
         section {
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
 
         h2 {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            color: #1a472a;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: #1a472a;
+        }
+
+        /* Sacred Location Section */
+        .sacred-intro {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(26, 71, 42, 0.05) 100%);
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
             text-align: center;
         }
 
-        /* About Section */
-        .about {
-            background: #f8f9ff;
-            padding: 2rem;
+        .sacred-intro h3 {
+            font-size: 1.8rem;
+            color: #1a472a;
+            margin-bottom: 1rem;
+        }
+
+        .sacred-intro p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .sacred-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight {
+            background: white;
+            padding: 1.5rem;
             border-radius: 10px;
             text-align: center;
+            border-left: 4px solid #d4af37;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
-        .about p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto;
+        .highlight-number {
+            font-size: 2.5rem;
+            color: #d4af37;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .highlight p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
         }
 
         /* Services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
         }
 
         .service-card {
             background: white;
-            border: 2px solid #667eea;
-            border-radius: 10px;
-            padding: 2rem;
+            border: 2px solid #e8dcc8;
+            border-radius: 15px;
+            padding: 2.5rem;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(26, 71, 42, 0.15);
+            border-color: #d4af37;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         .service-card h3 {
-            font-size: 1.3rem;
-            color: #667eea;
+            font-size: 1.4rem;
+            color: #1a472a;
             margin-bottom: 1rem;
         }
 
         .service-card p {
             color: #666;
-            line-height: 1.7;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Pilgrimage Routes */
+        .routes-section {
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.03) 0%, rgba(212, 175, 55, 0.03) 100%);
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .route-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #d4af37;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .route-card h4 {
+            color: #1a472a;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .route-duration {
+            color: #d4af37;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         /* Contact Section */
         .contact-info {
-            background: #f8f9ff;
-            padding: 2rem;
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(26, 71, 42, 0.1) 100%);
+            padding: 3rem;
+            border-radius: 15px;
             margin-bottom: 2rem;
+            border: 2px solid #e8dcc8;
         }
 
         .contact-details {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
 
         .contact-item {
-            display: flex;
-            align-items: start;
-            gap: 1rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-top: 3px solid #d4af37;
         }
 
         .contact-item .icon {
-            font-size: 1.5rem;
-            color: #667eea;
-            margin-top: 0.3rem;
-        }
-
-        .contact-item p {
-            margin: 0;
-            line-height: 1.6;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
         .contact-item strong {
-            color: #667eea;
+            color: #1a472a;
             display: block;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item p {
+            color: #666;
+            margin: 0;
         }
 
         /* Form Section */
         .form-container {
             background: white;
-            border: 2px solid #667eea;
-            border-radius: 10px;
-            padding: 2.5rem;
-            max-width: 700px;
+            border: 2px solid #e8dcc8;
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 750px;
             margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: #1a472a;
+            font-size: 0.95rem;
         }
 
         input,
         textarea,
         select {
             width: 100%;
-            padding: 0.8rem;
-            border: 1.5px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 0.9rem 1rem;
+            border: 1.5px solid #d4d4d4;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #fafaf8;
         }
 
         input:focus,
         textarea:focus,
         select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #d4af37;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+            background: white;
         }
 
         textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 140px;
         }
 
         .submit-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 5px;
+            padding: 1.1rem 2rem;
+            border: 2px solid #1a472a;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            font-family: 'Poppins', sans-serif;
         }
 
         .submit-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(26, 71, 42, 0.3);
+            background: linear-gradient(135deg, #2d5a3d 0%, #1a472a 100%);
         }
 
         .submit-button:active {
@@ -267,30 +434,45 @@
 
         .success-message {
             display: none;
-            background: #4caf50;
+            background: #27ae60;
             color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1rem;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
             text-align: center;
+            font-weight: 500;
+            border-left: 4px solid #229954;
         }
 
         /* Footer */
         footer {
-            background: #333;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             margin-top: 4rem;
+            border-top: 3px solid #d4af37;
         }
 
         footer p {
-            margin: 0.5rem 0;
+            margin: 0.7rem 0;
+            font-size: 0.95rem;
+        }
+
+        .footer-tagline {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.85;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
             }
 
             nav ul {
@@ -299,11 +481,29 @@
             }
 
             .logo {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+                margin: 0.5rem 0;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 0.5rem;
+            }
+
+            .sacred-intro {
+                padding: 2rem;
+            }
+
+            .form-container {
+                padding: 2rem;
             }
         }
     </style>
@@ -315,153 +515,223 @@
             <nav>
                 <div class="logo">🏔️ Adi Kailash Yatra</div>
                 <ul>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#sacred">Sacred Yatra</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#routes">Routes</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#form">Inquire</a></li>
                 </ul>
             </nav>
-            <div class="hero">
-                <h1>Unforgettable Adventures Await</h1>
-                <p>Expert Event Planning & Customized Trip Itineraries</p>
-                <a href="#form" class="cta-button">Plan Your Journey</a>
-            </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Adi Kailash Yatra</h1>
+            <div class="hero-subtitle">The Mini Kailash Pilgrimage</div>
+            <p>
+                Embark on a transformative spiritual journey to the sacred abode of Lord Shiva. 
+                We craft personalized pilgrimage experiences and unforgettable event celebrations 
+                amidst the mystical Himalayas.
+            </p>
+            <div>
+                <a href="#form" class="cta-button">Plan Your Pilgrimage</a>
+                <a href="#services" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
     <main class="container">
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Us</h2>
-            <div class="about">
+        <!-- Sacred Location Information -->
+        <section id="sacred">
+            <div class="sacred-intro">
+                <h3>🙏 About Adi Kailash - The Mini Kailash</h3>
                 <p>
-                    Welcome to Adi Kailash Yatra! We specialize in creating extraordinary travel experiences and managing events with meticulous attention to detail. 
-                    From planning your complete itinerary to arranging accommodations and transportation, we handle every aspect of your journey so you can focus 
-                    on creating memories. Whether you're seeking spiritual adventures, family vacations, or corporate events, we have the expertise to make it unforgettable.
+                    Adi Kailash, also known as "Chota Kailash" or the Mini Kailash, is a sacred pilgrimage destination in the Himalayas. 
+                    Located in the mystical regions of Pithoragarh in Uttarakhand, this holy site is believed to be the abode of Lord Shiva. 
+                    The pristine mountain peak, surrounded by ancient temples and breathtaking landscapes, offers a spiritual sanctuary for devotees 
+                    and trekkers seeking divine connection and natural beauty.
                 </p>
+            </div>
+
+            <div class="sacred-highlights">
+                <div class="highlight">
+                    <div class="highlight-number">3,600m</div>
+                    <p>Elevation of the sacred peak</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-number">5-7 Days</div>
+                    <p>Ideal pilgrimage duration</p>
+                </div>
+                <div class="highlight">
+                    <div class="highlight-number">∞</div>
+                    <p>Spiritual transformation awaits</p>
+                </div>
             </div>
         </section>
 
         <!-- Services Section -->
         <section id="services">
-            <h2>Our Services</h2>
+            <h2>Our Specialized Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3>🗓️ Event Planning</h3>
-                    <p>Complete event management from concept to execution. Weddings, conferences, celebrations, and corporate events tailored to your vision.</p>
+                    <div class="service-icon">🕉️</div>
+                    <h3>Pilgrimage Planning</h3>
+                    <p>Complete spiritual journey arrangements including sacred site visits, guided meditation sessions, and authentic pilgrimage experiences at Adi Kailash.</p>
                 </div>
                 <div class="service-card">
-                    <h3>✈️ Travel Arrangements</h3>
-                    <p>End-to-end trip planning including flights, transportation, and logistics. We ensure smooth and hassle-free journeys for you and your group.</p>
+                    <div class="service-icon">✈️</div>
+                    <h3>Travel & Transport</h3>
+                    <p>Hassle-free travel logistics from your doorstep to the sacred mountains. Comfortable transportation and smooth coordination for seamless journey.</p>
                 </div>
                 <div class="service-card">
-                    <h3>🏨 Accommodation</h3>
-                    <p>Handpicked hotels and resorts at competitive rates. We secure the best options that match your preferences and budget requirements.</p>
+                    <div class="service-icon">🏨</div>
+                    <h3>Premium Lodging</h3>
+                    <p>Carefully selected guest houses, resorts, and comfortable stays near pilgrimage sites. Experience local hospitality with modern amenities.</p>
                 </div>
                 <div class="service-card">
-                    <h3>📋 Itinerary Creation</h3>
-                    <p>Custom-designed day-by-day itineraries that maximize your experience. Every detail planned to perfection for optimal enjoyment.</p>
+                    <div class="service-icon">📋</div>
+                    <h3>Custom Itineraries</h3>
+                    <p>Meticulously crafted day-by-day itineraries balancing spiritual experiences with physical comfort. Tailored to your pace and preferences.</p>
                 </div>
                 <div class="service-card">
-                    <h3>🎯 Group Tours</h3>
-                    <p>Specialized group travel experiences with coordinated logistics. Perfect for families, organizations, and community outings.</p>
+                    <div class="service-icon">👥</div>
+                    <h3>Group Expeditions</h3>
+                    <p>Organize family pilgrimages, spiritual groups, or community yatras. Professional coordination for groups of any size with dedicated support.</p>
                 </div>
                 <div class="service-card">
-                    <h3>💼 Corporate Events</h3>
-                    <p>Professional event management for corporate gatherings, retreats, and team-building activities tailored to your organizational goals.</p>
+                    <div class="service-icon">🎉</div>
+                    <h3>Event Celebrations</h3>
+                    <p>Host memorable ceremonies, weddings, and celebrations in sacred Himalayan settings. Complete event management in spiritual locations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pilgrimage Routes -->
+        <section id="routes">
+            <h2>Popular Pilgrimage Routes</h2>
+            <div class="routes-section">
+                <div class="route-card">
+                    <h4>🏔️ Classic Adi Kailash Trek</h4>
+                    <div class="route-duration">Duration: 6-7 Days | Difficulty: Moderate</div>
+                    <p>The traditional pilgrimage route starting from Dharchula. Experience the spiritual essence of Adi Kailash with visits to sacred temples, 
+                    meditation caves, and the stunning Panchachuli peaks. Includes stays at pilgrim lodges and authentic mountain experiences.</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>⛰️ Extended Himalayan Yatra</h4>
+                    <div class="route-duration">Duration: 10-12 Days | Difficulty: Moderate-Hard</div>
+                    <p>An immersive spiritual journey combining Adi Kailash with visits to nearby sacred sites including Panchchuli Glacier and ancient temples. 
+                    Deep spiritual experiences with extended meditation and exploration of Himalayan heritage.</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>🧘 Spiritual Retreat Package</h4>
+                    <div class="route-duration">Duration: 5-7 Days | Difficulty: Easy-Moderate</div>
+                    <p>Perfect for spiritual seekers. Includes guided meditations, yoga sessions, Vedic teachings, and temple rituals at sacred sites. 
+                    Comfortable accommodations with flexibility for personal spiritual practices and rejuvenation.</p>
+                </div>
+
+                <div class="route-card">
+                    <h4>👨‍👩‍👧‍👦 Family Pilgrimage Package</h4>
+                    <div class="route-duration">Duration: 5-6 Days | Difficulty: Easy</div>
+                    <p>A family-friendly pilgrimage balancing spiritual experiences with comfort. Includes scenic stops, cultural experiences, and flexible pacing 
+                    suitable for children and elderly family members.</p>
                 </div>
             </div>
         </section>
 
         <!-- Contact Information -->
         <section id="contact">
-            <h2>Get in Touch</h2>
+            <h2>Connect With Us</h2>
             <div class="contact-info">
-                <h3 style="color: #667eea; margin-bottom: 1rem;">Contact Details</h3>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <div class="icon">📞</div>
-                        <div>
-                            <strong>Phone</strong>
-                            <p>+91 XXXXXXXXXX</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon">📧</div>
-                        <div>
-                            <strong>Email</strong>
-                            <p>info@theadikailashyatra.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="icon">📍</div>
-                        <div>
-                            <strong>Location</strong>
-                            <p>Ghāziābād, Uttar Pradesh, India</p>
-                        </div>
-                    </div>
+                <p style="text-align: center; color: #444; margin-bottom: 0;">
+                    Ready to embark on your sacred journey? Reach out to us through any of these channels. 
+                    Our dedicated team is here to guide you every step of the way.
+                </p>
+            </div>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="icon">📞</div>
+                    <strong>Phone</strong>
+                    <p>+91 XXXXXXXXXX</p>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">Call us anytime</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">📧</div>
+                    <strong>Email</strong>
+                    <p>info@theadikailashyatra.com</p>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">We respond quickly</p>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">📍</div>
+                    <strong>Location</strong>
+                    <p>Ghāziābād, Uttar Pradesh</p>
+                    <p style="font-size: 0.85rem; color: #999; margin-top: 0.5rem;">Serving all of India</p>
                 </div>
             </div>
         </section>
 
         <!-- Inquiry Form -->
         <section id="form">
-            <h2>Send Us Your Inquiry</h2>
+            <h2>Begin Your Sacred Journey</h2>
             <div class="form-container">
                 <div class="success-message" id="successMessage">
-                    ✓ Thank you! Your inquiry has been received. We'll get back to you soon!
+                    ✓ Namaste! Your inquiry has been received. We will contact you soon to discuss your pilgrimage. 🙏
                 </div>
                 <form id="inquiryForm">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" placeholder="Your full name" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
-                        <input type="tel" id="phone" name="phone" required>
+                        <input type="tel" id="phone" name="phone" placeholder="+91 XXXXXXXXXX" required>
                     </div>
 
                     <div class="form-group">
                         <label for="eventType">Service Type *</label>
                         <select id="eventType" name="eventType" required>
-                            <option value="">-- Select a Service --</option>
-                            <option value="Event Planning">Event Planning</option>
-                            <option value="Trip Planning">Trip Planning</option>
-                            <option value="Hotel Booking">Hotel Booking</option>
-                            <option value="Group Tour">Group Tour</option>
-                            <option value="Corporate Event">Corporate Event</option>
+                            <option value="">-- Select Your Interest --</option>
+                            <option value="Adi Kailash Pilgrimage">Adi Kailash Pilgrimage</option>
+                            <option value="Spiritual Retreat">Spiritual Retreat</option>
+                            <option value="Family Pilgrimage">Family Pilgrimage</option>
+                            <option value="Group Expedition">Group Expedition</option>
+                            <option value="Mountain Wedding">Mountain Wedding/Celebration</option>
+                            <option value="Corporate Retreat">Corporate Retreat</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="eventDate">Preferred Date</label>
-                        <input type="date" id="eventDate" name="eventDate">
+                        <label for="eventDate">Preferred Travel Month</label>
+                        <input type="text" id="eventDate" name="eventDate" placeholder="e.g., May 2025 or June-July">
                     </div>
 
                     <div class="form-group">
                         <label for="budget">Budget Range (Optional)</label>
-                        <input type="text" id="budget" name="budget" placeholder="e.g., 50,000 - 1,00,000">
+                        <input type="text" id="budget" name="budget" placeholder="e.g., ₹50,000 - ₹1,00,000">
                     </div>
 
                     <div class="form-group">
-                        <label for="guests">Number of Guests/Participants</label>
-                        <input type="number" id="guests" name="guests" placeholder="e.g., 50">
+                        <label for="guests">Number of Participants</label>
+                        <input type="number" id="guests" name="guests" placeholder="e.g., 5" min="1">
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your event or trip requirements..." required></textarea>
+                        <label for="message">Tell Us About Your Journey *</label>
+                        <textarea id="message" name="message" placeholder="Share your spiritual aspirations, preferences, and any special requirements for your pilgrimage..." required></textarea>
                     </div>
 
-                    <button type="submit" class="submit-button">Submit Inquiry</button>
+                    <button type="submit" class="submit-button">Submit Pilgrimage Inquiry</button>
                 </form>
             </div>
         </section>
@@ -469,8 +739,11 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Adi Kailash Yatra. All rights reserved.</p>
-        <p>Crafting extraordinary travel experiences and unforgettable events.</p>
+        <div class="container">
+            <p>&copy; 2024 Adi Kailash Yatra. All rights reserved.</p>
+            <p style="font-weight: 500;">Dedicated to crafting sacred journeys and unforgettable Himalayan experiences</p>
+            <p class="footer-tagline">🙏 "Embark on a journey that touches the soul and connects you to the divine" 🙏</p>
+        </div>
     </footer>
 
     <script>
