@@ -76,7 +76,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(26, 71, 42, 0.95) 0%, rgba(45, 90, 61, 0.95) 50%, rgba(139, 111, 71, 0.9) 100%),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="mountains" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M0,80 L25,30 L50,70 L75,20 L100,80" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect fill="url(%23mountains)" width="1200" height="600"/></svg>');
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="mountains" x="0" y="0" width="100" height="100" patternUnits="userSpac[...]
             background-size: cover;
             background-position: center;
             color: white;
@@ -422,14 +422,19 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .submit-button:hover {
+        .submit-button:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(26, 71, 42, 0.3);
             background: linear-gradient(135deg, #2d5a3d 0%, #1a472a 100%);
         }
 
-        .submit-button:active {
+        .submit-button:active:not(:disabled) {
             transform: translateY(0);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .success-message {
@@ -442,6 +447,18 @@
             text-align: center;
             font-weight: 500;
             border-left: 4px solid #229954;
+        }
+
+        .error-message {
+            display: none;
+            background: #e74c3c;
+            color: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            border-left: 4px solid #c0392b;
         }
 
         /* Footer */
@@ -681,6 +698,9 @@
                 <div class="success-message" id="successMessage">
                     ✓ Namaste! Your inquiry has been received. We will contact you soon to discuss your pilgrimage. 🙏
                 </div>
+                <div class="error-message" id="errorMessage">
+                    ✗ There was an issue submitting your form. Please try again.
+                </div>
                 <form id="inquiryForm">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
@@ -744,49 +764,65 @@
     <script>
         const form = document.getElementById('inquiryForm');
         const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitButton = form.querySelector('.submit-button');
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                eventType: document.getElementById('eventType').value,
-                eventDate: document.getElementById('eventDate').value,
-                budget: document.getElementById('budget').value,
-                guests: document.getElementById('guests').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toLocaleString('en-IN')
-            };
+            // Hide messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
 
-            // Replace with your Google Apps Script URL
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+
+            // Create FormData with field names matching your Google Sheet columns
+            const formData = new FormData();
+            formData.append('Timestamp', new Date().toLocaleString('en-IN'));
+            formData.append('Name', document.getElementById('name').value);
+            formData.append('Email', document.getElementById('email').value);
+            formData.append('Phone', document.getElementById('phone').value);
+            formData.append('Service Type', document.getElementById('eventType').value);
+            formData.append('Travel Month', document.getElementById('eventDate').value);
+            formData.append('Guests', document.getElementById('guests').value);
+            formData.append('Message', document.getElementById('message').value);
+
+            // Your Google Apps Script URL
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLaV4HKXuywGq0hlN7l_XH3a_tgdAWXufjh8wBp3_R_P3J4UIyD_qgs5pG6CGPp_ga1w/exec';
 
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    body: new FormData(form)
+                    body: formData,
+                    mode: 'no-cors'
                 });
 
-                if (response.ok) {
-                    successMessage.style.display = 'block';
-                    form.reset();
-                    
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 5000);
-                    
-                    // Scroll to success message
-                    successMessage.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    alert('There was an issue submitting your form. Please try again.');
-                }
+                // With no-cors mode, we can't check response status, so we assume success
+                successMessage.style.display = 'block';
+                form.reset();
+                submitButton.textContent = 'Submit Pilgrimage Inquiry';
+                submitButton.disabled = false;
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error submitting form. Please check your internet connection.');
+                errorMessage.style.display = 'block';
+                submitButton.textContent = 'Submit Pilgrimage Inquiry';
+                submitButton.disabled = false;
+                
+                // Hide error message after 5 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
             }
         });
     </script>
